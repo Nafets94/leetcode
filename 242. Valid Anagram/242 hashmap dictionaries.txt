@@ -1,0 +1,48 @@
+// hashmap
+// we use a hashmap for each string, in this case a dictionary
+// each key is a unique char and each value is the number of times the char appears in the string
+// we then compare the dictionaries
+
+public class Solution {
+    public bool IsAnagram(string s, string t) {
+        var sDictionary = new Dictionary<char, int>();
+        var tDictionary = new Dictionary<char, int>();
+        foreach (char c in s)
+            if (!sDictionary.ContainsKey(c))
+                sDictionary[c]=1;
+            else
+                sDictionary[c]++;
+        foreach (char c in t)
+            if (!tDictionary.ContainsKey(c))
+                tDictionary[c]=1;
+            else
+                tDictionary[c]++;
+
+        Console.WriteLine("sDictionary");
+        foreach (var pair in sDictionary)
+        {
+            Console.WriteLine($"{pair.Key}: {pair.Value}");
+        }
+
+        Console.WriteLine("tDictionary");
+        foreach (var pair in tDictionary)
+        {
+            Console.WriteLine($"{pair.Key}: {pair.Value}");
+        }
+        
+        if (sDictionary.Count != tDictionary.Count)
+            return false;
+
+        foreach (var kvp in sDictionary)
+        {
+            if (tDictionary.ContainsKey(kvp.Key)){
+                if (sDictionary[kvp.Key] != tDictionary[kvp.Key])
+                    return false;
+            } else {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
