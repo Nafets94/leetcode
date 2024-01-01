@@ -1,4 +1,6 @@
-//brute force
+// brute force
+// For an array of nnn integers, there are C(n,2)=n(n−1)/2 
+// pairs of integers. Thus, we may check all n(n−1)/2 pairs and see if there is any pair with duplicates.
 
 public class Solution {
     public bool ContainsDuplicate(int[] nums) {
