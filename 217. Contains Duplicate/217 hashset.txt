@@ -1,0 +1,26 @@
+// hashset
+// we use a hashset to store the nums array - it will contain no duplicates
+// we check the count of the hashset with the length of the array
+// if the hash count is smaller there are duplicates
+
+public class Solution {
+    void DisplaySet(HashSet<int> collection)
+    {
+        Console.Write("{");
+        foreach (int i in collection)
+        {
+            Console.Write(" {0}", i);
+        }
+        Console.WriteLine(" }");
+    }
+
+    public bool ContainsDuplicate(int[] nums) {
+        HashSet<int> myhash = new HashSet<int>(nums);
+
+        //DisplaySet(myhash);
+
+        if (myhash.Count != nums.Length) return true;
+
+        return false;
+    }
+}
