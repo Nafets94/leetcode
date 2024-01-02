@@ -1,0 +1,36 @@
+// Two-pass Hash Table
+// we go once through the array and we map nums[i] to the key and i to the value
+// if we encounter a duplicate key we check if 2 * that key = target and return if true
+// if not we can disregard that key
+
+// You traverse the array from the start to the finish. This means that if an item appears twice the you will see this
+// the second time that you find it. If this item multiplied by 2 is the target, then you will realise since it will
+// already exist in your map. Otherwise you're not really interested in its value or duplication since it's not the
+// solution anyway.
+
+// on the second iteration we look for target - nums[i]
+// if it's a key in the dictionary and it's different than the current element
+// we return both indexes
+
+public class Solution {
+    public int[] TwoSum(int[] nums, int target)
+    {
+        Dictionary<int, int> numsDic = new Dictionary<int, int>();
+        for (int i=0; i<nums.Length; i++)
+        {
+            if (numsDic.ContainsKey(nums[i]) && (nums[i] * 2 == target))
+                return new int[] { i, numsDic[nums[i]] };
+            numsDic[nums[i]] = i;
+        }
+        
+        for (int i=0; i<nums.Length; i++)
+        {
+            int complement = target - nums[i];
+            if (numsDic.ContainsKey(complement) && numsDic[complement] != i)
+            {
+                return new int[] { i, numsDic[complement] };
+            }
+        }
+        return null;
+    }
+}
