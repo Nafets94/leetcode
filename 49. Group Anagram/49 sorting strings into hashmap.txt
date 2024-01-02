@@ -1,0 +1,46 @@
+// each string in the array we sort
+// and we add it to a dictionary<string, List<string>> as following:
+// the key is the sorted string, the values is a list of the initial unsorted strings
+// at the end we transform the dictionary into an array of arrays
+
+public class Solution {
+    private string SortString(string input)
+    {
+        char[] characters = input.ToCharArray();
+        Array.Sort(characters);
+        return new string(characters);
+    }
+
+    private string[][] GroupValuesIntoArray(Dictionary<string, IList<string>> dictionary)
+    {
+        return dictionary.Values.Select(values => values.ToArray()).ToArray();
+    }
+
+    public IList<IList<string>> GroupAnagrams(string[] strs)
+    {
+        Dictionary<string, IList<string>> strsDic = new Dictionary<string, IList<string>>();
+        foreach (string str in strs)
+        {
+            string sortedString = SortString(str);
+            if (!strsDic.ContainsKey(sortedString))
+            {
+                strsDic[sortedString] = new List<string>();   
+            }
+            strsDic[sortedString].Add(str);
+        }
+
+        /*
+        foreach (var kvp in strsDic)
+        {
+            Console.WriteLine($"Key: {kvp.Key}");
+            foreach (var value in kvp.Value)
+            {
+                Console.WriteLine($" - {value}");
+            }
+        }*/
+
+        //return null;
+
+        return GroupValuesIntoArray(strsDic);
+    }
+}
