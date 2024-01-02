@@ -1,0 +1,20 @@
+// brute force
+// we go through the array
+// for every element i we go through all the other k elements
+// and we check if the target - element i == element k
+
+public class Solution {
+    public int[] TwoSum(int[] nums, int target)
+    {
+        int[] output = new int[2];
+        for (int i=0; i<nums.Length-1; i++)
+            for (int k=i+1; k<nums.Length; k++)
+                if (target - nums[i] == nums[k])
+                {
+                    output[0] = i;
+                    output[1] = k;
+                    break;
+                }
+        return output;
+    }
+}
