@@ -1,0 +1,36 @@
+// we take each string in the array and create an 26 integer array filled with 0's for int
+// we count the characters in the string and add them in the frequency array
+// we hash the array into a string e.g. abbccc = #1#2#3#0#0#0...#0
+// we use this string as the key in a hash table and the value the initial string
+// at the end we group the dictionary into an array of arrays
+
+public class Solution {
+    private string[][] GroupValuesIntoArray(Dictionary<string, IList<string>> dictionary)
+    {
+        return dictionary.Values.Select(values => values.ToArray()).ToArray();
+    }
+
+    public IList<IList<string>> GroupAnagrams(string[] strs)
+    {
+        Dictionary<string, IList<string>> strsDic = new Dictionary<string, IList<string>>();
+
+        foreach (string str in strs)
+        {
+            int[] count = new int[26];
+            foreach(char c in str.ToCharArray())
+                count[c - 'a']++;
+
+            string key = "";
+            for (int i=0; i<count.Length; i++)
+                key = key + "#" + count[i];
+
+            if (!strsDic.ContainsKey(key))
+            {
+                strsDic[key] = new List<string>();   
+            }
+            strsDic[key].Add(str);
+        }
+
+        return GroupValuesIntoArray(strsDic);
+    }
+}
