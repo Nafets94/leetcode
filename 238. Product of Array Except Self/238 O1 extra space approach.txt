@@ -1,0 +1,25 @@
+// O(n) time and O(n) space
+
+// we use the answer array to iterate forward with suffixes and backwards with prefixes
+
+public class Solution {
+    public int[] ProductExceptSelf(int[] nums) {
+        int[] answerArr = new int[nums.Length];
+
+        answerArr[0] = 1;
+
+        for(int i=1; i<nums.Length; i++)
+        {
+            answerArr[i] = nums[i-1] * answerArr[i-1];
+        }
+
+        int product = 1;
+        for(int k=nums.Length-1; k >= 0; k--)
+        {
+                answerArr[k] = answerArr[k] * product;
+                product = product * nums[k];   
+        }
+
+        return answerArr;
+    }
+}
