@@ -1,0 +1,40 @@
+public class Solution {
+    public int[] TopKFrequent(int[] nums, int k) {
+        Dictionary<int, int> numsDic = new Dictionary<int, int>();
+
+        for (int i=0; i<nums.Length; i++)
+        {
+            if (numsDic.ContainsKey(nums[i]))
+                numsDic[nums[i]]++;
+            else
+                numsDic[nums[i]]=1;
+        }
+
+        IList<int>[] buckets = new List<int>[nums.Length + 1];
+
+        for (int i = 1; i < buckets.Length; i++)
+        {
+            buckets[i] = new List<int>();
+        }
+
+        foreach(KeyValuePair<int, int> entry in numsDic)
+        {
+            buckets[entry.Value].Add(entry.Key);
+        }
+
+        List<int> results = new List<int>();
+        for (int i = buckets.Length-1; i >= 1; i--)
+        {
+            if (buckets[i].Count != 0 && k > 0)
+            {
+                foreach(int q in buckets[i])
+                {
+                    results.Add(q);
+                    k--;
+                }
+            }
+        }
+
+        return results.ToArray();
+    }
+}
