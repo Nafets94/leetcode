@@ -1,0 +1,33 @@
+// O(n) time and O(3*n) space
+
+// create two arrays
+// iterate the nums array
+// in the suffix array calculate the product of suffixes before element x of nums array
+// in the prefix array calculate the product of prefixes after element x of nums array
+
+public class Solution {
+    public int[] ProductExceptSelf(int[] nums) {
+        int[] suffixArr = new int[nums.Length];
+        int[] prefixArr = new int[nums.Length];
+        int[] answerArr = new int[nums.Length];
+
+        suffixArr[0] = 1;
+        prefixArr[nums.Length-1] = 1;
+
+        for(int i=1; i<nums.Length; i++)
+        {
+            suffixArr[i] = nums[i-1] * suffixArr[i-1];
+        }
+
+        for(int k=nums.Length-2; k >= 0; k--)
+        {
+            prefixArr[k] = nums[k+1] * prefixArr[k+1];
+        }
+
+        for(int i=0; i<nums.Length; i++)
+        {
+            answerArr[i] = suffixArr[i] * prefixArr[i];
+        }
+        return answerArr;
+    }
+}
