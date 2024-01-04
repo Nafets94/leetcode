@@ -1,0 +1,54 @@
+// we encode the string in ascii
+// between characters we separate them with # and between words with $
+// encoded example: 72#101#108#108#111$87#111#114#108#100$
+
+public class Codec {
+
+    // Encodes a list of strings to a single string.
+    public string encode(IList<string> strs) {
+        string result = "";
+        foreach (string str in strs) {
+            for(int i=0; i<str.Length; i++) {
+                byte asciiValue = Convert.ToByte(str[i]);
+                if (i==str.Length-1)
+                    result = result + asciiValue;
+                else
+                    result = result + asciiValue + "#";    
+            }
+            result = result + "$";
+        }
+
+        return result;
+    }
+
+    // Decodes a single string to a list of strings.
+    public IList<string> decode(string s) {
+        IList<string> strs = new List<string>();
+        string currentString= "";
+        string currentNumber = "";
+        foreach (char c in s)
+        {  
+            if (c == '$') {
+                if (!string.IsNullOrEmpty(currentNumber)) {
+                    currentString = currentString + Convert.ToChar(int.Parse(currentNumber));
+                    currentNumber = "";
+                }
+                strs.Add(currentString);
+                currentString = "";
+                
+            } else if (c == '#') {
+                if (!string.IsNullOrEmpty(currentNumber)) {
+                    currentString = currentString + Convert.ToChar(int.Parse(currentNumber));
+                    currentNumber = "";
+                }
+            } else {
+                currentNumber = currentNumber + c;
+            }
+        }
+        return strs;
+    }
+}
+
+// Your Codec object will be instantiated and called as such:
+// Codec codec = new Codec();
+// codec.decode(codec.encode(strs));
