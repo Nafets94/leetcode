@@ -1,0 +1,40 @@
+// blob:https://leetcode.com/c4a92b8b-a8e0-43c2-96f9-6a599648cd2c
+// blob:https://leetcode.com/e991b762-711e-45eb-8067-ba795d80ae54
+
+public class Solution {
+    public bool IsValidSudoku(char[][] board) {
+        int N = 9;
+
+        HashSet<char>[] rows = new HashSet<char>[N];
+        HashSet<char>[] cols = new HashSet<char>[N];
+        HashSet<char>[] squares = new HashSet<char>[N];
+        for (int r=0; r < N; r++) {
+            rows[r] = new HashSet<char>();
+            cols[r] = new HashSet<char>();
+            squares[r] = new HashSet<char>();
+        }
+
+        for (int r=0; r<N; r++) {
+            for(int c=0; c<N; c++) {
+                char val = board[r][c];
+
+                if (val == '.')
+                    continue;
+
+                if (rows[r].Contains(val))
+                    return false;
+                rows[r].Add(val);
+
+                if (cols[c].Contains(val))
+                    return false;
+                cols[c].Add(val);
+
+                int idx = (r/3) * 3 + c / 3;
+                if(squares[idx].Contains(val))
+                    return false;
+                squares[idx].Add(val);
+            }
+        }
+        return true;
+    }
+}
