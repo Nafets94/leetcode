@@ -1,0 +1,29 @@
+// O (n log n)
+
+public class Solution {
+    public int LongestConsecutive(int[] nums) {
+        if (nums.Length == 0) return 0;
+
+        int longest = 0;
+        int current = 1;
+        int[] distinctNums = nums.ToHashSet().ToArray();
+        Array.Sort(distinctNums);
+
+        int i = 0;
+        while (i < distinctNums.Length - 1)
+        {
+            if (distinctNums[i] + 1 == distinctNums[i+1]) {
+                current++;
+            } else {
+                if (current > longest)
+                {
+                    longest = current;
+                }
+                current = 1;
+            }
+            i++;
+        }
+
+        return current > longest ? current : longest;
+    }
+}
