@@ -1,0 +1,12 @@
+// bruteforce O(n^2)
+
+public class Solution {
+    public int MaxArea(int[] height) {
+        int max = -1;
+        for (int i = 0; i < height.Length - 1; i++)
+            for(int k = i + 1; k < height.Length; k++)
+                if (max < (k-i) * Math.Min(height[k], height[i]))
+                    max = (k-i) * Math.Min(height[k], height[i]);
+        return max;
+    }
+}
