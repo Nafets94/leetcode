@@ -1,0 +1,47 @@
+// ~O(n^2)
+
+public class Solution {
+    public IList<IList<int>> ThreeSum(int[] nums) {
+        IList<IList<int>> solution = new List<IList<int>>();
+        HashSet<string> triplets = new HashSet<string>();
+        
+        int i;
+        int j;
+        Array.Sort(nums); // O(n log n)
+
+        int[] result = new int[3];
+
+        for (int k = 0; k < nums.Length - 1; k++) // O(n)
+        {
+            i = k+1;
+            j = nums.Length - 1;
+
+            while (i < j) // O(n)
+            {
+                if (nums[i] + nums[j] + nums[k] == 0)
+                {
+                    //Console.WriteLine("["+nums[i]+", "+nums[j]+", "+nums[k]+"]");
+                    result[0]=nums[i];
+                    result[1]=nums[j];
+                    result[2]=nums[k];
+                    Array.Sort(result);
+
+                    string tripleKey = $"{result[0]},{result[1]},{result[2]}";
+                    if (!triplets.Contains(tripleKey))
+                    {
+                        triplets.Add(tripleKey);
+                        solution.Add(new List<int> {result[0], result[1], result[2]});
+                    }
+                }
+
+                if (nums[i] + nums[j] + nums[k] < 0){
+                    i++;
+                } else {
+                    j--;
+                }
+            }
+        }
+
+        return solution;
+    }
+}
