@@ -1,0 +1,22 @@
+public class Solution {
+    public int MaxArea(int[] height) {
+        int max = 0;
+        int currentMax;
+
+        int left = 0;
+        int right = height.Length - 1;
+
+        while (left < right) {
+            currentMax = (right-left) * Math.Min(height[left], height[right]);
+            if (max < currentMax)
+                max = currentMax;
+
+            if (height[left] < height[right])
+                left++;
+            else
+                right--;
+        }
+
+        return max;
+    }
+}
