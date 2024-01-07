@@ -1,0 +1,28 @@
+public class Solution {
+    public int Trap(int[] height) {
+        int[] leftMax = new int[height.Length];
+        int[] rightMax = new int[height.Length];
+        int[] trapped = new int[height.Length];
+
+        leftMax[0] = 0;
+        for (int i = 1; i < leftMax.Length; i++)
+        {
+            leftMax[i] = Math.Max(leftMax[i-1], height[i-1]);
+        }
+
+        rightMax[height.Length-1] = 0;
+        for (int i = rightMax.Length-2; i >= 0; i--)
+        {
+            rightMax[i] = Math.Max(rightMax[i+1], height[i+1]);
+        }
+
+        int maxWaterTrapped = 0;
+        for (int i=1; i < trapped.Length-1; i++){
+            trapped[i] = Math.Min(leftMax[i],rightMax[i]) - height[i];
+            if (trapped[i] > 0)
+            maxWaterTrapped += trapped[i];
+        }
+
+        return maxWaterTrapped;
+    }
+}
