@@ -10,3 +10,5 @@ Solutions to various leetcode problems in C#
 15. 3Sum with Approach 2: Hashset and Approach 3: "No-Sort"
 
 42. Approach 1: Brute force, Approach 3: Using stacks and **Approach 4: Using 2 pointers**
+
+22. Approach 3: Divide and Conquer
