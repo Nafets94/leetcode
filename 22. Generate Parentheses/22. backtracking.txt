@@ -1,0 +1,27 @@
+public class Solution {
+    public IList<string> GenerateParenthesis(int n) {
+        IList<string> results = new List<string>();
+        backtracking(results, new StringBuilder(), 0, 0 ,n);
+        return results;
+    }
+
+    private void backtracking(IList<string> results, StringBuilder currentString, int leftCount, int rightCount, int n)
+    {
+        if (currentString.Length == 2*n) {
+            results.Add(currentString.ToString());
+            return;
+        }
+
+        if (leftCount < n) {
+            currentString.Append("(");
+            backtracking(results, currentString, leftCount + 1, rightCount, n);
+            currentString.Remove(currentString.Length - 1, 1);
+        }
+
+        if (leftCount > rightCount) {
+            currentString.Append(")");
+            backtracking(results, currentString, leftCount, rightCount + 1, n);
+            currentString.Remove(currentString.Length - 1, 1);
+        }
+    }
+}
