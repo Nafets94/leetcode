@@ -1,0 +1,36 @@
+public class Solution {
+    public int EvalRPN(string[] tokens) {
+        if (tokens.Length == 1) return int.Parse(tokens[0]);
+
+        Stack<int> stack = new Stack<int>();
+
+        for (int i=0; i<tokens.Length; i++)
+        {
+            // isNumeric is a bool and returns it in n variable
+            var isNumeric = int.TryParse(tokens[i], out int n);
+            if (isNumeric)
+                stack.Push(n);
+            else {
+                int b = stack.Pop();
+                int a = stack.Pop();
+                switch (tokens[i])
+                {
+                    case "+":
+                        stack.Push(a+b);
+                        break;
+                    case "-":
+                        stack.Push(a-b);
+                        break;
+                    case "*":
+                        stack.Push(a*b);
+                        break;
+                    case "/":
+                        stack.Push(a/b);
+                        break;
+                }
+            }
+        }
+
+        return stack.Pop();
+    }
+}
