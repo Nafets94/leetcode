@@ -1,0 +1,30 @@
+public class Solution {
+    public int CarFleet(int target, int[] position, int[] speed) {
+
+        if (position.Length == 1) return 1;
+
+        (int, int, double)[] array = new (int, int, double)[position.Length];
+        Stack<(int, int, double)> stack = new Stack<(int, int, double)>();
+
+        for (int i=0; i<array.Length; i++) {
+            int currPosition = position[i];
+            int currSpeed = speed[i];
+            double currTime = (target - position[i]) / (double)speed[i];
+
+            array[i] = (currPosition, currSpeed, currTime);
+        }
+
+        Array.Sort(array, (a,b) => a.Item1.CompareTo(b.Item1));
+
+        for (int i=array.Length-1; i>=0; i--){
+            if (stack.Count == 0 ) stack.Push(array[i]);
+
+            if (stack.Count != 0 && stack.Peek().Item3 < array[i].Item3)
+            {
+                stack.Push(array[i]);
+            }
+        }
+
+        return stack.Count;
+    }
+}
