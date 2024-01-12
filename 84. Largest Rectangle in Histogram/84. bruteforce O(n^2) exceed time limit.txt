@@ -1,0 +1,15 @@
+public class Solution {
+    public int LargestRectangleArea(int[] heights) {
+        int maxarea = 0;
+        for (int i=0; i<heights.Length; i++)
+        {
+            int minHeight = int.MaxValue;
+            for(int j=i; j<heights.Length; j++)
+            {
+                if (minHeight > heights[j]) minHeight = heights[j];
+                if (maxarea < minHeight * (j-i+1)) maxarea = minHeight * (j-i+1);
+            }
+        }
+        return maxarea;
+    }
+}
