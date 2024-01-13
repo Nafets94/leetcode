@@ -1,0 +1,25 @@
+// divide and conquer approach
+
+public class Solution {
+    public int LargestRectangleArea(int[] heights) {
+        return CalculateArea(heights, 0, heights.Length - 1);
+    }
+
+    public int CalculateArea(int[] heights, int left, int right) {
+        if (left > right)
+            return 0;
+
+        int minHeight = int.MaxValue;
+        int minIndex = left;
+        for (int i=left; i<=right; i++)
+            if (minHeight > heights[i])
+                {
+                    minHeight = heights[i];
+                    minIndex = i;
+                }
+
+        return Math.Max(minHeight * (right-left+1),
+                        Math.Max(CalculateArea(heights, left, minIndex-1),
+                                 CalculateArea(heights, minIndex+1, right)));
+    }
+}
