@@ -13,5 +13,5 @@ Solutions to various leetcode problems in C#
 
 5. 22 Approach 3: Divide and Conquer
 
-6. 84. Largest Rectangle in Histogram with **Approach 4: Better Divide and Conquer with Segment tree**
+6. 84 Largest Rectangle in Histogram with **Approach 4: Better Divide and Conquer with Segment tree**
 
