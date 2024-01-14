@@ -1,0 +1,43 @@
+// https://www.youtube.com/watch?v=zx5Sw9130L0
+
+public class Solution {
+    public int LargestRectangleArea(int[] heights) {
+        int maxArea = 0;
+        Stack<(int, int)> stack = new Stack<(int, int)>();
+
+        for(int i=0; i<heights.Length; i++) {
+            if (stack.Count == 0)
+                stack.Push((i, heights[i]));
+            else {
+                if (heights[i] >= stack.Peek().Item2)
+                    stack.Push((i, heights[i]));
+                else {
+                    int index = 0;
+                    while (stack.Count > 0 && heights[i] < stack.Peek().Item2 ) {
+                        index = stack.Peek().Item1;
+                        int height = stack.Peek().Item2;
+                        stack.Pop();
+                        if (maxArea < (i-index) * height) maxArea = (i-index) * height;
+                    }
+                stack.Push((index, heights[i]));
+                }
+            }
+        }
+
+        // Printing all elements in the stack
+        Console.WriteLine("Stack contents:");
+        foreach (var pair in stack) {
+            Console.WriteLine($"Index: {pair.Item1}, Height: {pair.Item2}");
+        }
+
+        int maxIndex = heights.Length;
+        while (stack.Count != 0) {
+            int index = stack.Peek().Item1;
+            int height = stack.Peek().Item2;
+            if (maxArea < (maxIndex - index) * height) maxArea = (maxIndex - index) * height;
+            stack.Pop();
+        }
+
+        return maxArea;
+    }
+}
