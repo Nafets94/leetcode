@@ -12,3 +12,6 @@ Solutions to various leetcode problems in C#
 4. 42 Approach 1: Brute force, Approach 3: Using stacks and **Approach 4: Using 2 pointers**
 
 5. 22 Approach 3: Divide and Conquer
+
+6. 84. Largest Rectangle in Histogram with **Approach 4: Better Divide and Conquer with Segment tree**
+
