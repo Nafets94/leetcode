@@ -1,0 +1,28 @@
+public class Solution {
+    public int MinEatingSpeed(int[] piles, int h) {
+        int speed = 1;
+        bool workableSpeed = false;
+        
+        while (!workableSpeed)
+        {
+            int hoursSpent = 0;
+            for (int i=0; i<piles.Length; i++)
+            {
+                hoursSpent += (int)Math.Ceiling((double)piles[i] / speed);
+                if (hoursSpent > h) {
+                    break;
+                }
+            }
+
+            if (hoursSpent <= h)
+            {
+                workableSpeed = true;
+                return speed;
+            }
+
+            speed++;
+        }
+
+        return -1;
+    }
+}
