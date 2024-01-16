@@ -1,0 +1,30 @@
+public class Solution {
+    public int MinEatingSpeed(int[] piles, int h)
+    {
+        int left = 1;
+        int right = 1;
+        foreach (int pile in piles)
+        {
+            right = Math.Max(pile, right);
+        }
+
+        return BinarySearch(piles, h, left, right);
+    }
+
+    public int BinarySearch(int[] piles, int h, int left, int right)
+    {
+        if (left >= right) return right;
+
+        int middle = left + (right - left) / 2;
+        int hoursSpent = 0;
+
+        foreach (int pile in piles) {
+            hoursSpent += (int)Math.Ceiling((double)pile / middle);
+        }
+
+        if (hoursSpent <= h)
+            return BinarySearch(piles, h, left, middle);
+        else
+            return BinarySearch(piles, h, middle+1, right);
+    }
+}
