@@ -1,0 +1,23 @@
+public class Solution {
+    public int FindMin(int[] nums)
+    {
+        if (nums.Length == 1) return nums[0];
+        if (nums.Length == 2) return Math.Min(nums[0], nums[1]);
+        if (nums[nums.Length-1] > nums[0])
+            return nums[0];
+        return BinarySearch(nums, 0, nums.Length-1);
+    }
+
+    public int BinarySearch(int[] nums, int left, int right)
+    {
+        int mid = left + (right - left) / 2;
+
+        if (mid > 0 && nums[mid-1] > nums[mid]) return nums[mid];
+        if (mid < nums.Length- 1 && nums[mid] > nums[mid+1]) return nums[mid+1];
+
+        if (nums[left] < nums[mid])
+            return BinarySearch(nums, mid+1, right);
+        else
+            return BinarySearch(nums, left, mid-1);
+    }
+}
