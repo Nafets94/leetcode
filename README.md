@@ -15,3 +15,5 @@ Solutions to various leetcode problems in C#
 
 6. 84 Largest Rectangle in Histogram with **Approach 4: Better Divide and Conquer with Segment tree**
 
+7. 33 Search in Rotated Sorted Array with **Approach 2: Find Pivot Index + Binary Search with Shift** and **Approach 3: One Binary Search**
+
