@@ -1,0 +1,33 @@
+public class TimeMap {
+    private IDictionary<string, IDictionary<int, string>> keyTimeDic;
+
+    public TimeMap()
+    {
+        keyTimeDic = new Dictionary<string, SortedDictionary<int, string>>();
+    }
+    
+    public void Set(string key, string value, int timestamp)
+    {
+        if (keyTimeDic.ContainsKey(key)) {
+            keyTimeDic[key].Add(timestamp, value);
+        } else {
+            keyTimeDic[key] = new SortedDictionary<int, string>() { { timestamp, value } };
+        }
+    }
+    
+    public string Get(string key, int timestamp)
+    {
+        if (keyTimeDic.ContainsKey(key))
+        {
+            
+        }
+        return "";
+    }
+}
+
+/**
+ * Your TimeMap object will be instantiated and called as such:
+ * TimeMap obj = new TimeMap();
+ * obj.Set(key,value,timestamp);
+ * string param_2 = obj.Get(key,timestamp);
+ */
