@@ -17,5 +17,5 @@ Solutions to various leetcode problems in C#
 
 7. 33 Search in Rotated Sorted Array with **Approach 2: Find Pivot Index + Binary Search with Shift** and **Approach 3: One Binary Search**
 
-8. 4. Median of Two Sorted Arrays with **Approach 2: Binary Search, Recursive** and **Approach 3: A Better Binary Search**
+8. 4 Median of Two Sorted Arrays with **Approach 2: Binary Search, Recursive** and **Approach 3: A Better Binary Search**
 
