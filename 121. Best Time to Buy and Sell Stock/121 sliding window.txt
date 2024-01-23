@@ -1,0 +1,16 @@
+public class Solution {
+    public int MaxProfit(int[] prices) {
+        int maxProfit = 0;
+        int minDay = int.MaxValue;
+
+        for (int i=0; i<prices.Length; i++)
+            if(prices[i] < minDay)
+                minDay = prices[i];
+            else{
+                if (maxProfit < prices[i] - minDay)
+                    maxProfit = prices[i] - minDay;
+            }
+            
+        return maxProfit;
+    }
+}
