@@ -1,0 +1,28 @@
+public class Solution {
+    public int SubstringLength(string s)
+    {
+        HashSet<char> characters = new HashSet<char>(s);
+
+        return characters.Count;
+    }
+
+    public int LengthOfLongestSubstring(string s)
+    {
+
+
+        int maxLength = 0;
+
+        for (int i=0; i<s.Length; i++) {
+            for (int j=i; j<s.Length; j++) {
+                string substring = s.Substring(i, j-i == 0 ? 1: j-i+1);
+                int currentMaxLength = SubstringLength(substring);
+
+                if (substring.Length > currentMaxLength) break;
+
+                if (currentMaxLength > maxLength) maxLength = currentMaxLength;
+            }
+        }
+
+        return maxLength;
+    }
+}
