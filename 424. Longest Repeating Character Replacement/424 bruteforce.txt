@@ -1,0 +1,33 @@
+// AABACCCDDDDDDDDCCCCC", k = 3
+// bruteforce O(n^3)
+
+public class Solution {
+    public int CharacterReplacement(string s, int k) {
+
+        int maxLength = 0;
+        
+        for (int i=0; i<s.Length; i++)
+            for(int j=i; j<s.Length; j++)
+            {
+                string substring = s.Substring(i, j-i == 0 ? 1 : j-i+1);
+
+                IDictionary<char, int> charDict = new Dictionary<char, int>();
+                foreach (char c in substring)
+                {
+                    if (charDict.ContainsKey(c))
+                        charDict[c]++;
+                    else
+                        charDict[c] = 1;
+                }
+
+                int maxDict = charDict.Values.Max();
+
+                if (substring.Length - maxDict - k <= 0)
+                {
+                    if (maxLength < substring.Length) maxLength = substring.Length;
+                }
+            }
+
+        return maxLength;
+    }
+}
