@@ -1,0 +1,22 @@
+public class Solution {
+    public int CharacterReplacement(string s, int k)
+    {
+        int maxLength = 0;
+
+        return maxLength;
+    }
+
+    public bool CheckValidSubstring(string s, int substringLength, int k)
+    {
+
+
+        return false;
+    }
+
+    public int BinarySearch(string s, int left, int right)
+    {
+
+
+        return 0;
+    }
+}
