@@ -1,22 +1,81 @@
 public class Solution {
     public int CharacterReplacement(string s, int k)
     {
-        int maxLength = 0;
-
-        return maxLength;
+        return BinarySearch(s, 0, s.Length, k);
     }
 
     public bool CheckValidSubstring(string s, int substringLength, int k)
     {
+        if (s.Length < substringLength) return false;
 
+        IDictionary<char, int> substringDict = new Dictionary<char, int>();
+
+        // Populate the dictionary with the first window
+        for (int j=0; j < substringLength; j++)
+        {
+            if (substringDict.ContainsKey(s[j]))
+            {
+                substringDict[s[j]]++;
+            }
+            else
+            {
+                substringDict[s[j]] = 1;
+            }
+        }
+
+        if (IsValidSubstring(substringDict, substringLength, k)) return true;
+
+        for (int i=substringLength; i<s.Length; i++)
+        {
+            // Add new character to the dictionary
+            if (substringDict.ContainsKey(s[i]))
+            {
+                substringDict[s[i]]++;
+            }
+            else
+            {
+                substringDict[s[i]] = 1;
+            }
+
+
+            // Remove the oldest characters
+
+            char oldChar = s[i - substringLength];
+            if (substringDict[oldChar] == 1)
+            {
+                substringDict.Remove(oldChar);
+            }
+            else
+            {
+                substringDict[oldChar]--;
+            }
+
+            if (IsValidSubstring(substringDict, substringLength, k)) return true;
+        }
 
         return false;
     }
 
-    public int BinarySearch(string s, int left, int right)
+    private bool IsValidSubstring(IDictionary<char, int> substringDict, int substringLength, int k)
     {
+        int maxCharCount = substringDict.Values.Max();
 
+        return substringLength - maxCharCount - k <= 0;
+    }
 
-        return 0;
+    public int BinarySearch(string s, int left, int right, int k)
+    {
+        if (left > right) return right;
+
+        int mid = left + (right - left) / 2;
+
+        if (CheckValidSubstring(s, mid, k))
+        {
+            return BinarySearch(s, mid+1, right, k);
+        }
+        else
+        {
+            return BinarySearch(s, left, mid-1, k);
+        }
     }
 }
