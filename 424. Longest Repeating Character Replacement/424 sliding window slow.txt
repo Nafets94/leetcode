@@ -1,6 +1,32 @@
 public class Solution {
     public int CharacterReplacement(string s, int k)
     {
-        
+        HashSet<char> uniqueChars = new HashSet<char>(s);
+
+        int longestSubstring = 0;
+        foreach(char c in s)
+        {
+            int count = 0;
+            int start = 0;
+            for (int end=0; end<s.Length; end++)
+            {
+                if (s[end] == c) count++;
+
+                while (!IsSubstringValid(end, start, count, k))
+                {
+                    if (s[start] == c) count--;
+                    start++;
+                }
+
+                if (longestSubstring < end - start + 1) longestSubstring = end - start + 1;
+            }
+        }
+
+        return longestSubstring;
+    }
+
+    public bool IsSubstringValid(int end, int start, int count, int k)
+    {
+        return end - start + 1 - count - k <= 0;
     }
 }
