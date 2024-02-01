@@ -1,0 +1,37 @@
+    using System.Text;
+
+    List<string> GeneratePermutations(string input)
+    {
+        List<string> result = new List<string>();
+        StringBuilder solution = new StringBuilder("");
+        Permute(input, solution, 0, input.Length-1, result);
+        return result;
+    }
+
+    void Permute(string input, StringBuilder solution, int start, int end, List<string> result)
+    {
+        if (solution.Length == input.Length)
+            result.Add(solution.ToString());
+        else
+        {
+            for (int i = start; i <= end; i++)
+            {
+                solution.Append(input[i]);
+                Permute(input, solution, start+1, end, result);
+                solution.Remove(solution.Length - 1, 1);
+            }
+        }
+    }
+
+    void Launch()
+    {
+        string input = "ABCDE";
+        var permutations = GeneratePermutations(input);
+
+        foreach (string perm in permutations)
+        {
+            Console.WriteLine(perm);
+        }
+    }
+
+    Launch();
