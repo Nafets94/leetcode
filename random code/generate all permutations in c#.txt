@@ -1,0 +1,44 @@
+    List<string> GeneratePermutations(string input)
+    {
+        List<string> result = new List<string>();
+        Permute(input, 0, input.Length-1, result);
+        return result;
+    }
+
+    void Permute(string input, int start, int end, List<string> result)
+    {
+        if (start == end)
+            result.Add(input);
+        else
+        {
+            for (int i = start; i <= end; i++)
+            {
+                input = Swap(input, start, i);
+                Permute(input, start+1, end, result);
+                input = Swap(input, start, i);
+            }
+        }
+    }
+    
+    string Swap(string str, int i, int j)
+    {
+        char temp;
+        char[] charArray = str.ToCharArray();
+        temp = charArray[i];
+        charArray[i] = charArray[j];
+        charArray[j] = temp;
+        return new string(charArray);
+    }
+
+    void Launch()
+    {
+        string input = "ABCDE";
+        var permutations = GeneratePermutations(input);
+
+        foreach (string perm in permutations)
+        {
+            Console.WriteLine(perm);
+        }
+    }
+
+    Launch();
