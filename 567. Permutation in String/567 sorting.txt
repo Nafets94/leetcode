@@ -1,0 +1,22 @@
+public class Solution {
+    public bool CheckInclusion(string s1, string s2) 
+    {
+        s1 = Sort(s1);
+        //Console.WriteLine("s1: " + s1);
+        for (int i=0; i <= s2.Length - s1.Length; i++)
+        {
+            //Console.WriteLine("s2 substring: " + s2.Substring(i, s1.Length));
+            if (s1 == Sort(s2.Substring(i, s1.Length)))
+                return true;
+        }
+
+        return false;
+    }
+
+    public string Sort(string str)
+    {
+        char[] charArray = str.ToCharArray();
+        Array.Sort(charArray);
+        return new string(charArray);
+    }
+}
