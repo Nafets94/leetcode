@@ -1,0 +1,69 @@
+// sliding window with hashmap
+
+public class Solution {
+    public bool CheckInclusion(string s1, string s2) 
+    {
+        if (s1.Length > s2.Length) return false;
+
+        IDictionary<char, int> s1Dict = new Dictionary<char, int>();
+
+        foreach (char c in s1)
+        {
+            if (s1Dict.ContainsKey(c))
+                s1Dict[c]++;
+            else
+                s1Dict[c] = 1;
+        }
+
+        IDictionary<char, int> s2Dict = new Dictionary<char, int>();
+
+        foreach (char c in s2.Substring(0, s1.Length))
+        {
+            if (s2Dict.ContainsKey(c))
+                s2Dict[c]++;
+            else
+                s2Dict[c] = 1;
+        }
+
+        if (AreDictionariesEqual(s1Dict, s2Dict))
+             return true;
+
+        for (int i=s1.Length; i<s2.Length; i++) 
+        {
+            // Add next element to the hashmap
+            if (s2Dict.ContainsKey(s2[i]))
+                s2Dict[s2[i]]++;
+            else
+                s2Dict[s2[i]] = 1;
+
+            // Remove element from start of the window
+            if (s2Dict[s2[i - s1.Length]] == 1)
+                s2Dict.Remove(s2[i - s1.Length]);
+            else
+                s2Dict[s2[i - s1.Length]]--;
+
+            if (AreDictionariesEqual(s1Dict, s2Dict))
+             return true;
+        }
+
+        return false;
+    }
+
+    public bool AreDictionariesEqual(IDictionary<char, int> dict1, IDictionary<char, int> dict2)
+    {
+        if (dict1.Count != dict2.Count) return false;
+
+        foreach (var kvp in dict1)
+        {
+            int value;
+            if (!dict2.TryGetValue(kvp.Key, out value))
+                return false; // Key not found in second dictionary
+
+            if (value != kvp.Value)
+                return false; // Value differs for the same key
+        }
+
+        // dictionaries are equal
+        return true;
+    }
+}
