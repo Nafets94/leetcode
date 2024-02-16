@@ -19,3 +19,5 @@ Solutions to various leetcode problems in C#
 
 8. 4 Median of Two Sorted Arrays with **Approach 2: Binary Search, Recursive** and **Approach 3: A Better Binary Search**
 
+9. 567 Approach 6: Optimized Sliding Window
+
