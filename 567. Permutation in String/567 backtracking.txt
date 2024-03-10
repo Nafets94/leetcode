@@ -1,0 +1,44 @@
+public class Solution {
+    public List<string> GeneratePermutations(string s1)
+    {
+        List<string> permutations = new List<string>();
+        Permute(s1, 0, s1.Length-1, permutations);
+        return permutations;
+    }
+
+    public void Permute(string s1, int start, int end, List<string> permutations)
+    {
+        if (start == end)
+            permutations.Add(s1);
+
+        for (int i=start; i<=end; i++)
+        {
+            s1 = Swap(s1, start, i);
+            Permute(s1, start+1, end, permutations);
+            s1 = Swap(s1, start, i);
+        }
+    }
+
+    string Swap(string s1, int start, int i)
+    {
+        char temp;
+        char[] stringToChars = s1.ToCharArray();
+        temp = stringToChars[start];
+        stringToChars[start] = stringToChars[i];
+        stringToChars[i] = temp;
+        return new string(stringToChars);
+    }
+
+    public bool CheckInclusion(string s1, string s2) {
+        List<string> s1Permutations = new List<string>();
+        s1Permutations = GeneratePermutations(s1);
+
+        foreach (string permutation in s1Permutations)
+        {
+            if (s2.Contains(permutation))
+                return true;
+        }
+
+        return false;
+    }
+}

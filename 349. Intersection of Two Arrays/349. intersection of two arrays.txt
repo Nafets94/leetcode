@@ -1,0 +1,14 @@
+public class Solution {
+    public int[] Intersection(int[] nums1, int[] nums2) {
+        
+        HashSet<int> hashNums1 = new HashSet<int>(nums1);
+        HashSet<int> hashNums2 = new HashSet<int>(nums2);
+
+        hashNums1.IntersectWith(hashNums2);
+
+        int[] uniqueResult = new int[hashNums1.Count];
+        hashNums1.CopyTo(uniqueResult);
+
+        return uniqueResult;
+    }
+}
